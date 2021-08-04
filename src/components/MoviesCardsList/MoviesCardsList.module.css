@@ -1,0 +1,17 @@
+.MoviesCardsList
+{
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin: 0 -10px;
+}
+
+.MoviesCardsListItem
+{
+  max-width: 250px;
+  margin: 10px;
+}

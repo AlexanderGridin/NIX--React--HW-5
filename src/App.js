@@ -1,11 +1,9 @@
-import Container from "./components/layout/Container/Container";
+import HomePage from "./pages/HomePage";
 
 const App = () => {
   return (
     <div className="App">
-      <Container>
-        text
-      </Container>
+      <HomePage />
     </div>
   );
 }

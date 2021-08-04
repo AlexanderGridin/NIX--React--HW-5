@@ -1,0 +1,21 @@
+.ResponsiveImageWrapper
+{
+  position: relative;
+}
+
+.ResponsiveImage
+{
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  max-width: 100%;
+}
+
+.AtuallyImage
+{
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+}
