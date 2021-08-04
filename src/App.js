@@ -1,7 +1,11 @@
-function App () {
+import Container from "./components/layout/Container/Container";
+
+const App = () => {
   return (
     <div className="App">
-      test3
+      <Container>
+        text
+      </Container>
     </div>
   );
 }
