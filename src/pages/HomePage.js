@@ -23,7 +23,7 @@ const HomePage = () => {
 
 
   return (
-    <Page>
+    <Page title="Top 250 movies">
       <MoviesCardsList movies={ movies } />
     </Page>
   )
