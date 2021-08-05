@@ -24,10 +24,12 @@ const HomePage = () => {
     })
   }, []);
 
-
   return (
     <Page title="Top 250 movies">
-      <MoviesCardsList movies={ movies } onViewMovieFull={ setSelectedMovie } />
+      { movies && (
+        <MoviesCardsList movies={ movies } onViewMovieFull={ setSelectedMovie } />
+      ) }
+
       { selectedMovie && (
         <Modal onCLose={ () => setSelectedMovie(null) }>
           <MovieFull movie={ selectedMovie } />

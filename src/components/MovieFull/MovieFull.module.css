@@ -1,0 +1,44 @@
+.MovieFull
+{
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+}
+
+.MovieFullMedia
+{
+  flex-shrink: 0;
+  margin-right: 25px;
+}
+
+.MovieFullContent
+{
+  width: 100%;
+}
+
+.MovieFullTitle
+{
+  margin-bottom: 25px;
+}
+
+.MovieFullField
+{
+  display: flex;
+  align-items: flex-start;
+  border-bottom: 1px solid #ddd;
+  padding: 7px 0;
+}
+
+.MovieFullField:last-child
+{
+  border-bottom: none;
+}
+
+.MovieFullFieldLabel
+{
+  flex-shrink: 0;
+  margin-right: 7px;
+  font-weight: bold;
+  max-width: 130px;
+  width: 100%;
+}
