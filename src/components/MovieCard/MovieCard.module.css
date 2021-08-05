@@ -7,7 +7,7 @@
 
 .MovieCard:hover
 {
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  box-shadow: 0 0 40px rgba(245,197,24,0.3);
 }
 
 .MovieCardBody,

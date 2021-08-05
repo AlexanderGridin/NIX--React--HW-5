@@ -2,7 +2,7 @@ import ResponsiveImage from "../ResponsiveImage/ResponsiveImage";
 
 import styles from "./MovieCard.module.css";
 
-const MovieCard = ({ movie }) => {
+const MovieCard = ({ movie, onVeiwFull }) => {
   return (
     <div className={ styles.MovieCard }>
       <div className={ styles.MovieCardMedia }>
@@ -13,7 +13,7 @@ const MovieCard = ({ movie }) => {
         <div>{ movie.Year }</div>
       </div>
       <div className={ styles.MovieCardFooter }>
-        <button>Info</button>
+        <button onClick={ () => onVeiwFull(movie) }>Info</button>
         <button>Remove</button>
       </div>
     </div>

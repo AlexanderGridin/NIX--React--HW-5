@@ -1,0 +1,16 @@
+.Header
+{
+  background-color: #121212;
+  color: #FFF;
+  padding: 15px 0;
+  box-shadow: 0 0 40px rgba(245,197,24,0.3);
+  position: relative;
+  z-index: 9;
+}
+
+.HeaderRow
+{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
