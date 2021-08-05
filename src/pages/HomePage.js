@@ -9,6 +9,7 @@ import Page from "./Page/Page";
 import MoviesCardsList from "../components/MoviesCardsList/MoviesCardsList";
 import Modal from "../components/Modal/Modal";
 import MovieFull from "../components/MovieFull/MovieFull";
+import Loader from "../components/Loader/Loader";
 
 const HomePage = () => {
   const [movies, setMovies] = useState(null);
@@ -26,6 +27,8 @@ const HomePage = () => {
 
   return (
     <Page title="Top 250 movies">
+      { !movies && <Loader /> }
+
       { movies && (
         <MoviesCardsList movies={ movies } onViewMovieFull={ setSelectedMovie } />
       ) }

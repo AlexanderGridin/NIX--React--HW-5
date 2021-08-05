@@ -1,0 +1,52 @@
+.LoaderWrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Loader {
+  width: 200px;
+  height: 200px;
+  display: inline-block;
+  overflow: hidden;
+  background: none;
+}
+
+.LoaderSpinner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0; /* see note above */
+}
+
+.LoaderSpinnerRolling {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border: 20px solid #F5C518;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: ldio-vhzgemge69l 1s linear infinite;
+  top: 100px;
+  left: 100px;
+  box-sizing: content-box;
+}
+
+@keyframes ldio-vhzgemge69l {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
