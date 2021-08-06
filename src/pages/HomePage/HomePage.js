@@ -1,19 +1,19 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { setLoadedMovies, setMovieForInfoView, setTotalPagesForPagination, removeMovieFromTopMovies, setCurrentPaginationPage } from "../store/moviesSlice";
-import { setModalIsActive } from "../store/modalSlice";
+import { setLoadedMovies, setMovieForInfoView, setTotalPagesForPagination, removeMovieFromTopMovies, setCurrentPaginationPage } from "../../store/moviesSlice";
+import { setModalIsActive } from "../../store/modalSlice";
 
-import splitDataByNumberOfItemsPerPage from "../lib/splitDataByNumberOfItemsPerPage";
-import OMDbApi from "../lib/OMDbApi";
-import { MOVIES, MODAL } from "../lib/constants";
+import splitDataByNumberOfItemsPerPage from "../../lib/splitDataByNumberOfItemsPerPage";
+import OMDbApi from "../../lib/OMDbApi";
+import { MOVIES, MODAL } from "../../lib/constants";
 
-import Page from "./Page/Page";
-import MoviesCardsList from "../components/MoviesCardsList/MoviesCardsList";
-import Pagination from "../components/Pagination/Pagination";
-import Modal from "../components/Modal/Modal";
-import MovieFull from "../components/MovieFull/MovieFull";
-import Loader from "../components/Loader/Loader";
+import Page from "../Page/Page";
+import MoviesCardsList from "../../components/MoviesCardsList/MoviesCardsList";
+import Pagination from "../../components/Pagination/Pagination";
+import Modal from "../../components/Modal/Modal";
+import MovieFull from "../../components/MovieFull/MovieFull";
+import Loader from "../../components/Loader/Loader";
 
 const HomePage = () => {
   const dispatch = useDispatch();

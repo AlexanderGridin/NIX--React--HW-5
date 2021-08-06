@@ -2,7 +2,7 @@ import { Provider } from "react-redux";
 import store from "./store/index";
 
 import Header from "./components/Header/Header";
-import HomePage from "./pages/HomePage";
+import HomePage from "./pages/HomePage/HomePage";
 
 const App = () => {
   return (
