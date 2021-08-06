@@ -6,33 +6,33 @@ const moviesSlice = createSlice({
   name: 'movies',
   initialState: {
     topMovies,
-    movies: MOVIES.NOT_LOADED,
-    selectedMovie: MOVIES.NO_SELECTED,
-    totalPagesWithMovies: MOVIES.NO_PAGES,
-    currentPage: 1
+    loadedMovies: MOVIES.NOT_LOADED,
+    movieForInfoView: MOVIES.NO_SELECTED,
+    totalPagesForPagination: MOVIES.NO_PAGES,
+    currentPaginationPage: 1
   },
   reducers: {
-    setMovies (state, action) {
-      state.movies = action.payload.movies;
+    setLoadedMovies (state, action) {
+      state.loadedMovies = action.payload.loadedMovies;
     },
 
-    setSelectedMovie (state, action) {
-      state.selectedMovie = action.payload.movie;
+    setMovieForInfoView (state, action) {
+      state.movieForInfoView = action.payload.movie;
     },
 
-    setTotalPagesWithMovies (state, action) {
-      state.totalPagesWithMovies = action.payload.totalPagesWithMovies;
+    setTotalPagesForPagination (state, action) {
+      state.totalPagesForPagination = action.payload.totalPagesForPagination;
     },
 
     removeMovieFromTopMovies (state, action) {
       state.topMovies = state.topMovies.filter((movieId) => movieId !== action.payload.movieId);
     },
 
-    setCurrentPage (state, action) {
-      state.currentPage = action.payload.pageNumber;
+    setCurrentPaginationPage (state, action) {
+      state.currentPaginationPage = action.payload.currentPaginationPage;
     }
   }
 });
 
-export const { setMovies, setSelectedMovie, setTotalPagesWithMovies, removeMovieFromTopMovies, setCurrentPage } = moviesSlice.actions;
+export const { setLoadedMovies, setMovieForInfoView, setTotalPagesForPagination, removeMovieFromTopMovies, setCurrentPaginationPage } = moviesSlice.actions;
 export default moviesSlice.reducer;
