@@ -6,15 +6,15 @@ const DANGER = "danger";
 const Button = ({ type, visualStyle = PRIMARY, children, onClick }) => {
   return (
     <button
-      className={ `
+      className={`
         ${styles.Button} 
         ${visualStyle === PRIMARY && styles.ButtonPrimary}
         ${visualStyle === DANGER && styles.ButtonDanger}
-      ` }
-      type={ type }
-      onClick={ onClick }
+      `}
+      type={type}
+      onClick={onClick}
     >
-      { children }
+      {children}
     </button>
   );
 };

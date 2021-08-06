@@ -6,19 +6,19 @@ import styles from "./Header.module.css";
 
 const Header = () => {
   return (
-    <header className={ styles.Header }>
+    <header className={styles.Header}>
       <Container>
-        <div className={ styles.HeaderRow }>
-          <div className={ styles.HeaderColumn }>
+        <div className={styles.HeaderRow}>
+          <div className={styles.HeaderColumn}>
             <Logo />
           </div>
-          <div className={ styles.HeaderColumn }>
+          <div className={styles.HeaderColumn}>
             <MoviesSearchForm />
           </div>
         </div>
       </Container>
     </header>
-  )
+  );
 };
 
 export default Header;

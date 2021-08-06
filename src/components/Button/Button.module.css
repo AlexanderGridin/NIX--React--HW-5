@@ -1,5 +1,5 @@
 .Button {
-  font-size: .875rem;
+  font-size: 0.875rem;
   padding: 7px 17px;
   border-radius: 4px;
   transition: 0.4s;
@@ -13,26 +13,24 @@
 }
 
 .ButtonPrimary {
-  background-color: #F5C518;
-  border: 2px solid #F5C518;
+  background-color: #f5c518;
+  border: 2px solid #f5c518;
   color: #000;
 }
 
 .ButtonPrimary:hover {
   background-color: #000;
-  color: #F5C518;
+  color: #f5c518;
 }
 
-.ButtonDanger
-{
-  background-color: #DD5044;
-  border: 2px solid #DD5044;
-  color: #FFF;
+.ButtonDanger {
+  background-color: #dd5044;
+  border: 2px solid #dd5044;
+  color: #fff;
 }
 
-.ButtonDanger:hover
-{
-  color: #DD5044;
+.ButtonDanger:hover {
+  color: #dd5044;
   background-color: transparent;
   background-color: #000;
 }

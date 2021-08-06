@@ -9,8 +9,8 @@ export const MOVIES = {
 export const MODAL = {
   IS_ACTIVE: true,
   IS_DISABLED: false,
-}
+};
 
 export const PAGINATION = {
-  INITIAL_PAGE: 1
-}
+  INITIAL_PAGE: 1,
+};

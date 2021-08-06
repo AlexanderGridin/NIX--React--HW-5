@@ -1,7 +1,13 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { setLoadedMovies, setMovieForInfoView, setTotalPagesForPagination, removeMovieFromTopMovies, setCurrentPaginationPage } from "../../store/moviesSlice";
+import {
+  setLoadedMovies,
+  setMovieForInfoView,
+  setTotalPagesForPagination,
+  removeMovieFromTopMovies,
+  setCurrentPaginationPage,
+} from "../../store/moviesSlice";
 import { setModalIsActive } from "../../store/modalSlice";
 
 import splitDataByNumberOfItemsPerPage from "../../lib/splitDataByNumberOfItemsPerPage";
@@ -18,13 +24,19 @@ import Loader from "../../components/Loader/Loader";
 const HomePage = () => {
   const dispatch = useDispatch();
 
-  const topMovies = useSelector(state => state.movies.topMovies);
-  const movies = useSelector(state => state.movies.loadedMovies);
-  const movieForInfoView = useSelector(state => state.movies.movieForInfoView);
-  const totalPagesForPagination = useSelector(state => state.movies.totalPagesForPagination);
-  const currentPaginationPage = useSelector(state => state.movies.currentPaginationPage);
+  const topMovies = useSelector((state) => state.movies.topMovies);
+  const movies = useSelector((state) => state.movies.loadedMovies);
+  const movieForInfoView = useSelector(
+    (state) => state.movies.movieForInfoView
+  );
+  const totalPagesForPagination = useSelector(
+    (state) => state.movies.totalPagesForPagination
+  );
+  const currentPaginationPage = useSelector(
+    (state) => state.movies.currentPaginationPage
+  );
 
-  const isModalActive = useSelector(state => state.modal.isActive);
+  const isModalActive = useSelector((state) => state.modal.isActive);
 
   const handlePageChange = (currentPaginationPage) => {
     dispatch(setCurrentPaginationPage({ currentPaginationPage }));
@@ -37,7 +49,7 @@ const HomePage = () => {
 
   const handleMovieRemoving = (movie) => {
     dispatch(removeMovieFromTopMovies({ movieId: movie.imdbID }));
-  }
+  };
 
   const handleModalClose = () => {
     dispatch(setMovieForInfoView({ movie: MOVIES.NO_SELECTED }));
@@ -47,48 +59,71 @@ const HomePage = () => {
     dispatch(setLoadedMovies({ loadedMovies: MOVIES.NOT_LOADED }));
 
     const omdbApi = new OMDbApi();
-    const [getMoviesFromPage, totalPagesForPagination] = splitDataByNumberOfItemsPerPage(topMovies, MOVIES.PER_PAGE);
+    const [getMoviesFromPage, totalPagesForPagination] =
+      splitDataByNumberOfItemsPerPage(topMovies, MOVIES.PER_PAGE);
     let moviesFromCurrentPage = getMoviesFromPage(currentPaginationPage);
 
     if (!moviesFromCurrentPage && totalPagesForPagination === 0) {
-      dispatch(setLoadedMovies({ loadedMovies: MOVIES.NO_MOVIES }))
+      dispatch(setLoadedMovies({ loadedMovies: MOVIES.NO_MOVIES }));
       return;
     }
 
     if (!moviesFromCurrentPage) {
-      dispatch(setTotalPagesForPagination({ totalPagesForPagination: totalPagesForPagination - 1 }));
-      dispatch(setCurrentPaginationPage({ currentPaginationPage: currentPaginationPage - 1 }));
+      dispatch(
+        setTotalPagesForPagination({
+          totalPagesForPagination: totalPagesForPagination - 1,
+        })
+      );
+      dispatch(
+        setCurrentPaginationPage({
+          currentPaginationPage: currentPaginationPage - 1,
+        })
+      );
       moviesFromCurrentPage = getMoviesFromPage(currentPaginationPage - 1);
     }
 
     if (moviesFromCurrentPage) {
       dispatch(setTotalPagesForPagination({ totalPagesForPagination }));
 
-      omdbApi.fetchMoviesByIds(moviesFromCurrentPage).then(movies => {
+      omdbApi.fetchMoviesByIds(moviesFromCurrentPage).then((movies) => {
         dispatch(setLoadedMovies({ loadedMovies: movies }));
-      })
+      });
     }
   }, [topMovies, currentPaginationPage]);
 
   return (
     <Page title="Top 250 movies">
-      { totalPagesForPagination && movies !== MOVIES.NO_MOVIES && <Pagination totalPages={ totalPagesForPagination } activePageProp={ currentPaginationPage } onPageChange={ handlePageChange } /> }
+      {totalPagesForPagination && movies !== MOVIES.NO_MOVIES && (
+        <Pagination
+          totalPages={totalPagesForPagination}
+          activePageProp={currentPaginationPage}
+          onPageChange={handlePageChange}
+        />
+      )}
 
-      { movies === MOVIES.NO_MOVIES && (<div style={ { textAlign: 'center', color: '#FFF' } }>No movies to show...</div>) }
+      {movies === MOVIES.NO_MOVIES && (
+        <div style={{ textAlign: "center", color: "#FFF" }}>
+          No movies to show...
+        </div>
+      )}
 
-      { movies && movies !== MOVIES.NO_MOVIES && (
-        <MoviesCardsList movies={ movies } onViewMovieInfo={ viewMovieInfo } onMovieRemove={ handleMovieRemoving } />
-      ) }
+      {movies && movies !== MOVIES.NO_MOVIES && (
+        <MoviesCardsList
+          movies={movies}
+          onViewMovieInfo={viewMovieInfo}
+          onMovieRemove={handleMovieRemoving}
+        />
+      )}
 
-      { isModalActive && (
-        <Modal onCLose={ handleModalClose }>
-          <MovieFull movie={ movieForInfoView } />
+      {isModalActive && (
+        <Modal onCLose={handleModalClose}>
+          <MovieFull movie={movieForInfoView} />
         </Modal>
-      ) }
+      )}
 
-      { !movies && movies !== MOVIES.NO_MOVIES && <Loader /> }
+      {!movies && movies !== MOVIES.NO_MOVIES && <Loader />}
     </Page>
-  )
+  );
 };
 
 export default HomePage;

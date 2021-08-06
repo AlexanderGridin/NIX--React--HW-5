@@ -6,13 +6,13 @@ import HomePage from "./pages/HomePage/HomePage";
 
 const App = () => {
   return (
-    <Provider store={ store }>
+    <Provider store={store}>
       <div className="App">
         <Header />
         <HomePage />
       </div>
     </Provider>
   );
-}
+};
 
 export default App;

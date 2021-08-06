@@ -7,5 +7,5 @@ export default configureStore({
   reducer: {
     movies: moviesReducer,
     modal: modalReducer,
-  }
+  },
 });

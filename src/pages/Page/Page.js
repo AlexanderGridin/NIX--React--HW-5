@@ -5,13 +5,13 @@ import styles from "./Page.module.css";
 
 const Page = ({ title, children }) => {
   return (
-    <div className={ styles.Page }>
+    <div className={styles.Page}>
       <Container>
-        <PageTitle title={ title } />
-        { children }
+        <PageTitle title={title} />
+        {children}
       </Container>
     </div>
-  )
+  );
 };
 
 export default Page;

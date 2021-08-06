@@ -7,10 +7,7 @@ const splitDataByNumberOfItemsPerPage = (data, itemsPerPage) => {
     result.push(copyOfData.splice(0, itemsPerPage));
   }
 
-  return [
-    (pageNumber) => result[pageNumber - 1],
-    numberOfPages,
-  ];
+  return [(pageNumber) => result[pageNumber - 1], numberOfPages];
 };
 
 export default splitDataByNumberOfItemsPerPage;

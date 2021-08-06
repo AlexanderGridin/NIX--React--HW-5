@@ -31,7 +31,7 @@ const Pagination = ({ totalPages, activePageProp, onPageChange }) => {
       setActivePage(selectedPageNumber);
       onPageChange(selectedPageNumber);
     }
-  }
+  };
 
   const setNextPage = () => {
     const selectedPage = activePage + 1;
@@ -40,14 +40,14 @@ const Pagination = ({ totalPages, activePageProp, onPageChange }) => {
       setActivePage(selectedPage);
       onPageChange(selectedPage);
     }
-  }
+  };
 
   const setLastPage = () => {
     if (activePage !== totalPages) {
       setActivePage(totalPages);
       onPageChange(totalPages);
     }
-  }
+  };
 
   useEffect(() => {
     if (activePageProp) {
@@ -56,30 +56,62 @@ const Pagination = ({ totalPages, activePageProp, onPageChange }) => {
   }, [activePageProp]);
 
   return (
-    <div className={ styles.Pagination }>
-      <button className={ `${styles.PaginationFirst} ${styles.PaginationButton}` } onClick={ setFirstPage }>{ '<<' }</button>
-      <button className={ `${styles.PaginationPrev} ${styles.PaginationButton}` } onClick={ setPrevPage }>Prev</button>
+    <div className={styles.Pagination}>
+      <button
+        className={`${styles.PaginationFirst} ${styles.PaginationButton}`}
+        onClick={setFirstPage}
+      >
+        {"<<"}
+      </button>
+      <button
+        className={`${styles.PaginationPrev} ${styles.PaginationButton}`}
+        onClick={setPrevPage}
+      >
+        Prev
+      </button>
 
-      <ul className={ styles.PaginationPages } onClick={ setPage }>
-        { visiblePages && visiblePages.map((pageNumber) => {
-          return (
-            <li className={ styles.PaginationPagesItem } key={ pageNumber }>
-              { pageNumber === activePage ?
-                <button className={ `${styles.PaginationPage} ${styles.PaginationButton} ${styles.PaginationPageActive}` } disabled={ true }>{ pageNumber }</button> :
-                <button className={ `${styles.PaginationPage} ${styles.PaginationButton}` }>{ pageNumber }</button> }
-            </li>
-          )
-        }) }
+      <ul className={styles.PaginationPages} onClick={setPage}>
+        {visiblePages &&
+          visiblePages.map((pageNumber) => {
+            return (
+              <li className={styles.PaginationPagesItem} key={pageNumber}>
+                {pageNumber === activePage ? (
+                  <button
+                    className={`${styles.PaginationPage} ${styles.PaginationButton} ${styles.PaginationPageActive}`}
+                    disabled={true}
+                  >
+                    {pageNumber}
+                  </button>
+                ) : (
+                  <button
+                    className={`${styles.PaginationPage} ${styles.PaginationButton}`}
+                  >
+                    {pageNumber}
+                  </button>
+                )}
+              </li>
+            );
+          })}
       </ul>
 
-      <button className={ `${styles.PaginationNext} ${styles.PaginationButton}` } onClick={ setNextPage }>Next</button>
-      <button className={ `${styles.PaginationLast} ${styles.PaginationButton}` } onClick={ setLastPage }>{ '>>' }</button>
+      <button
+        className={`${styles.PaginationNext} ${styles.PaginationButton}`}
+        onClick={setNextPage}
+      >
+        Next
+      </button>
+      <button
+        className={`${styles.PaginationLast} ${styles.PaginationButton}`}
+        onClick={setLastPage}
+      >
+        {">>"}
+      </button>
     </div>
   );
 };
 
 // TODO: РЕФАКТОРИНГ!
-function getVisiblePages (activePage, totalPages) {
+function getVisiblePages(activePage, totalPages) {
   let pages = [];
   const NUMBER_OF_VISIBLE_PAGES = 5;
   const halfOfVisiblePages = Math.floor(NUMBER_OF_VISIBLE_PAGES / 2);

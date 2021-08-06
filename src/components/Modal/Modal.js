@@ -15,13 +15,16 @@ const Modal = ({ children, onCLose }) => {
   };
 
   return (
-    <div className={ styles.Modal }>
-      <div className={ styles.ModalBackgroundClosure } onClick={ handleClosing }></div>
-      <div className={ styles.ModalInner }>
-        <button className={ styles.ModalCloseButton } onClick={ handleClosing }>
+    <div className={styles.Modal}>
+      <div
+        className={styles.ModalBackgroundClosure}
+        onClick={handleClosing}
+      ></div>
+      <div className={styles.ModalInner}>
+        <button className={styles.ModalCloseButton} onClick={handleClosing}>
           &times;
         </button>
-        <div className={ styles.ModalContent }>{ children }</div>
+        <div className={styles.ModalContent}>{children}</div>
       </div>
     </div>
   );
