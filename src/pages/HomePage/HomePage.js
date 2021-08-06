@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import {
@@ -6,13 +6,12 @@ import {
   setMovieForInfoView,
   setTotalPagesForPagination,
   removeMovieFromTopMovies,
-  setCurrentPaginationPage,
 } from "../../store/moviesSlice";
 import { setModalIsActive } from "../../store/modalSlice";
 
 import splitDataByNumberOfItemsPerPage from "../../lib/splitDataByNumberOfItemsPerPage";
 import OMDbApi from "../../lib/OMDbApi";
-import { MOVIES, MODAL } from "../../lib/constants";
+import { MOVIES, MODAL, PAGINATION } from "../../lib/constants";
 
 import Page from "../Page/Page";
 import MoviesCardsList from "../../components/MoviesCardsList/MoviesCardsList";
@@ -32,14 +31,15 @@ const HomePage = () => {
   const totalPagesForPagination = useSelector(
     (state) => state.movies.totalPagesForPagination
   );
-  const currentPaginationPage = useSelector(
-    (state) => state.movies.currentPaginationPage
+
+  const [currentPaginationPage, setCurrentPaginationPage] = useState(
+    PAGINATION.INITIAL_PAGE
   );
 
   const isModalActive = useSelector((state) => state.modal.isActive);
 
-  const handlePageChange = (currentPaginationPage) => {
-    dispatch(setCurrentPaginationPage({ currentPaginationPage }));
+  const handlePageChange = (activePaginationPage) => {
+    setCurrentPaginationPage(activePaginationPage);
   };
 
   const viewMovieInfo = (movie) => {
@@ -74,11 +74,8 @@ const HomePage = () => {
           totalPagesForPagination: totalPagesForPagination - 1,
         })
       );
-      dispatch(
-        setCurrentPaginationPage({
-          currentPaginationPage: currentPaginationPage - 1,
-        })
-      );
+
+      setCurrentPaginationPage(currentPaginationPage - 1);
       moviesFromCurrentPage = getMoviesFromPage(currentPaginationPage - 1);
     }
 
@@ -96,7 +93,7 @@ const HomePage = () => {
       {totalPagesForPagination && movies !== MOVIES.NO_MOVIES && (
         <Pagination
           totalPages={totalPagesForPagination}
-          activePageProp={currentPaginationPage}
+          currentPage={currentPaginationPage}
           onPageChange={handlePageChange}
         />
       )}

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { MOVIES, PAGINATION } from "../lib/constants";
+import { MOVIES } from "../lib/constants";
 import topMovies from "../lib/topMovies";
 
 const moviesSlice = createSlice({
@@ -9,7 +9,6 @@ const moviesSlice = createSlice({
     loadedMovies: MOVIES.NOT_LOADED,
     movieForInfoView: MOVIES.NO_SELECTED,
     totalPagesForPagination: MOVIES.NO_PAGES,
-    currentPaginationPage: PAGINATION.INITIAL_PAGE,
   },
   reducers: {
     setLoadedMovies(state, action) {
@@ -29,10 +28,6 @@ const moviesSlice = createSlice({
         (movieId) => movieId !== action.payload.movieId
       );
     },
-
-    setCurrentPaginationPage(state, action) {
-      state.currentPaginationPage = action.payload.currentPaginationPage;
-    },
   },
 });
 
@@ -41,6 +36,5 @@ export const {
   setMovieForInfoView,
   setTotalPagesForPagination,
   removeMovieFromTopMovies,
-  setCurrentPaginationPage,
 } = moviesSlice.actions;
 export default moviesSlice.reducer;

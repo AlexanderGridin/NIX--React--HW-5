@@ -4,73 +4,73 @@ import { PAGINATION } from "../../lib/constants";
 
 import styles from "./Pagination.module.css";
 
-const Pagination = ({ totalPages, activePageProp, onPageChange }) => {
+const Pagination = ({ totalPages, currentPage, onPageChange }) => {
   const [activePage, setActivePage] = useState(PAGINATION.INITIAL_PAGE);
   let visiblePages = getVisiblePages(activePage, totalPages);
 
-  const setFirstPage = () => {
+  const gotoFirstPage = () => {
     if (activePage !== 1) {
       setActivePage(1);
-      onPageChange(1);
+      onPageChange && onPageChange(1);
     }
   };
 
-  const setPrevPage = () => {
-    const selectedPage = activePage - 1;
+  const gotoPrevPage = () => {
+    const targetPage = activePage - 1;
 
-    if (selectedPage >= 1) {
-      setActivePage(selectedPage);
-      onPageChange(selectedPage);
+    if (targetPage >= 1) {
+      setActivePage(targetPage);
+      onPageChange && onPageChange(targetPage);
     }
   };
 
-  const setPage = (e) => {
-    const selectedPageNumber = +e.target.textContent;
+  const gotoPage = (e) => {
+    const targetPageNumber = +e.target.textContent;
 
-    if (selectedPageNumber !== activePage) {
-      setActivePage(selectedPageNumber);
-      onPageChange(selectedPageNumber);
+    if (targetPageNumber !== activePage) {
+      setActivePage(targetPageNumber);
+      onPageChange && onPageChange(targetPageNumber);
     }
   };
 
-  const setNextPage = () => {
-    const selectedPage = activePage + 1;
+  const gotoNextPage = () => {
+    const targetPage = activePage + 1;
 
-    if (selectedPage <= totalPages) {
-      setActivePage(selectedPage);
-      onPageChange(selectedPage);
+    if (targetPage <= totalPages) {
+      setActivePage(targetPage);
+      onPageChange && onPageChange(targetPage);
     }
   };
 
-  const setLastPage = () => {
+  const gotoLastPage = () => {
     if (activePage !== totalPages) {
       setActivePage(totalPages);
-      onPageChange(totalPages);
+      onPageChange && onPageChange(totalPages);
     }
   };
 
   useEffect(() => {
-    if (activePageProp) {
-      setActivePage(activePageProp);
+    if (currentPage) {
+      setActivePage(currentPage);
     }
-  }, [activePageProp]);
+  }, [currentPage]);
 
   return (
     <div className={styles.Pagination}>
       <button
         className={`${styles.PaginationFirst} ${styles.PaginationButton}`}
-        onClick={setFirstPage}
+        onClick={gotoFirstPage}
       >
         {"<<"}
       </button>
       <button
         className={`${styles.PaginationPrev} ${styles.PaginationButton}`}
-        onClick={setPrevPage}
+        onClick={gotoPrevPage}
       >
         Prev
       </button>
 
-      <ul className={styles.PaginationPages} onClick={setPage}>
+      <ul className={styles.PaginationPages} onClick={gotoPage}>
         {visiblePages &&
           visiblePages.map((pageNumber) => {
             return (
@@ -96,13 +96,13 @@ const Pagination = ({ totalPages, activePageProp, onPageChange }) => {
 
       <button
         className={`${styles.PaginationNext} ${styles.PaginationButton}`}
-        onClick={setNextPage}
+        onClick={gotoNextPage}
       >
         Next
       </button>
       <button
         className={`${styles.PaginationLast} ${styles.PaginationButton}`}
-        onClick={setLastPage}
+        onClick={gotoLastPage}
       >
         {">>"}
       </button>
