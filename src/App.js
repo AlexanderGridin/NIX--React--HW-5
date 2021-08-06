@@ -4,8 +4,7 @@ import { Provider } from "react-redux";
 import store from "./store/index";
 
 import Header from "./components/Header/Header";
-// import HomePage from "./pages/HomePage/HomePage";
-import { ROUTES } from "./lib/routes";
+import { ROUTES } from "./lib/ROUTES";
 import renderRoutes from "./lib/renderRoutes";
 
 const App = () => {

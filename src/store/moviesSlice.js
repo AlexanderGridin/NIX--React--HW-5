@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { MOVIES } from "../lib/constants";
-import topMovies from "../lib/topMovies";
+import TOP_MOVIES from "../lib/TOP_MOVIES";
 
 const moviesSlice = createSlice({
   name: "movies",
   initialState: {
-    topMovies,
+    topMovies: TOP_MOVIES,
     loadedMovies: MOVIES.NOT_LOADED,
     movieForInfoView: MOVIES.NO_SELECTED,
     totalPagesForPagination: MOVIES.NO_PAGES,
