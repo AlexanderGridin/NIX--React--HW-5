@@ -27,7 +27,6 @@ const HomePage = () => {
   const isModalActive = useSelector(state => state.modal.isActive);
 
   const handlePageChange = (currentPaginationPage) => {
-    console.log(currentPaginationPage)
     dispatch(setCurrentPaginationPage({ currentPaginationPage }));
   };
 
@@ -56,21 +55,19 @@ const HomePage = () => {
       return;
     }
 
-    if (moviesFromCurrentPage) {
-      dispatch(setTotalPagesForPagination({ totalPagesForPagination }));
-    }
-
     if (!moviesFromCurrentPage) {
       dispatch(setTotalPagesForPagination({ totalPagesForPagination: totalPagesForPagination - 1 }));
-      dispatch(setCurrentPaginationPage({ pageNumber: currentPaginationPage - 1 }));
+      dispatch(setCurrentPaginationPage({ currentPaginationPage: currentPaginationPage - 1 }));
       moviesFromCurrentPage = getMoviesFromPage(currentPaginationPage - 1);
     }
 
-    console.log(moviesFromCurrentPage, totalPagesForPagination)
+    if (moviesFromCurrentPage) {
+      dispatch(setTotalPagesForPagination({ totalPagesForPagination }));
 
-    omdbApi.fetchMoviesByIds(moviesFromCurrentPage).then(movies => {
-      dispatch(setLoadedMovies({ loadedMovies: movies }));
-    })
+      omdbApi.fetchMoviesByIds(moviesFromCurrentPage).then(movies => {
+        dispatch(setLoadedMovies({ loadedMovies: movies }));
+      })
+    }
   }, [topMovies, currentPaginationPage]);
 
   return (
