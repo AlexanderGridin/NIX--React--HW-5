@@ -13,33 +13,33 @@
 }
 
 .Loader {
-  width: 200px;
-  height: 200px;
-  display: inline-block;
-  overflow: hidden;
   background: none;
+  display: inline-block;
+  height: 200px;
+  overflow: hidden;
+  width: 200px;
 }
 
 .LoaderSpinner {
-  width: 100%;
+  backface-visibility: hidden;
   height: 100%;
   position: relative;
+  transform-origin: 0 0;
   transform: translateZ(0) scale(1);
-  backface-visibility: hidden;
-  transform-origin: 0 0; /* see note above */
+  width: 100%;
 }
 
 .LoaderSpinnerRolling {
-  position: absolute;
-  width: 120px;
-  height: 120px;
-  border: 20px solid #F5C518;
-  border-top-color: transparent;
-  border-radius: 50%;
   animation: ldio-vhzgemge69l 1s linear infinite;
-  top: 100px;
-  left: 100px;
+  border-radius: 50%;
+  border: 20px solid #f5c518;
+  border-top-color: transparent;
   box-sizing: content-box;
+  height: 120px;
+  left: 100px;
+  position: absolute;
+  top: 100px;
+  width: 120px;
 }
 
 @keyframes ldio-vhzgemge69l {

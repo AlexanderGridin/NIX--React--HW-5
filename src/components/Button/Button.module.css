@@ -1,15 +1,15 @@
 .Button {
-  font-size: 0.875rem;
-  padding: 7px 17px;
   border-radius: 4px;
-  transition: 0.4s;
   display: inline-block;
+  font-size: 0.875rem;
   margin-right: 10px;
+  padding: 7px 17px;
+  transition: 0.4s;
 }
 
 .Button:hover {
-  cursor: pointer;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 }
 
 .ButtonPrimary {
@@ -30,7 +30,6 @@
 }
 
 .ButtonDanger:hover {
-  color: #dd5044;
-  background-color: transparent;
   background-color: #000;
+  color: #dd5044;
 }

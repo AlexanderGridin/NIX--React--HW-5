@@ -1,7 +1,7 @@
 .MovieFull {
-  width: 100%;
-  display: flex;
   align-items: flex-start;
+  display: flex;
+  width: 100%;
 }
 
 .MovieFullMedia {
@@ -18,9 +18,9 @@
 }
 
 .MovieFullField {
-  display: flex;
   align-items: flex-start;
   border-bottom: 1px solid #ddd;
+  display: flex;
   padding: 7px 0;
 }
 
@@ -30,8 +30,8 @@
 
 .MovieFullFieldLabel {
   flex-shrink: 0;
-  margin-right: 7px;
   font-weight: bold;
+  margin-right: 7px;
   max-width: 130px;
   width: 100%;
 }

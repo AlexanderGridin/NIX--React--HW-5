@@ -1,15 +1,15 @@
 .Header {
   background-color: #121212;
   background-image: url(../../assets/dirty_old_shirt.png);
+  box-shadow: 0 0 40px rgba(245, 197, 24, 0.3);
   color: #fff;
   padding: 15px 0;
-  box-shadow: 0 0 40px rgba(245, 197, 24, 0.3);
   position: relative;
   z-index: 9;
 }
 
 .HeaderRow {
-  display: flex;
   align-items: center;
+  display: flex;
   justify-content: space-between;
 }
