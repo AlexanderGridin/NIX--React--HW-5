@@ -8,7 +8,7 @@ const Page = ({ title, children }) => {
     <div className={styles.Page}>
       <Container>
         <PageTitle title={title} />
-        {children}
+        <div className={styles.PageContent}>{children}</div>
       </Container>
     </div>
   );

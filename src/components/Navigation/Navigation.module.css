@@ -1,0 +1,50 @@
+.Navigation {
+  margin-top: 15px;
+  width: 100%;
+}
+
+.NavigationList {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 0 -7px;
+  padding: 0;
+}
+
+.NavigationListItem {
+  margin: 0 7px;
+}
+
+.NavigationLink:link,
+.NavigationLink:visited {
+  color: #fff;
+  display: inline-block;
+  padding: 5px 15px;
+  position: relative;
+  text-decoration: none;
+  transition: 0.4s;
+}
+
+.NavigationLink:hover,
+.NavigationLinkActive,
+.NavigationLinkActive:visited {
+  color: #f5c518;
+}
+
+.NavigationLink::before {
+  background-color: #f5c518;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 0;
+  position: absolute;
+  transition: 0.4s;
+  width: 0;
+}
+
+.NavigationLink:hover::before,
+.NavigationLinkActive::before {
+  width: 100%;
+}

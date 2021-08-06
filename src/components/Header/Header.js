@@ -1,6 +1,7 @@
 import Container from "../Container/Container";
 import Logo from "../Logo/Logo";
 import MoviesSearchForm from "../MoviesSearchForm/MoviesSearchForm";
+import Navigation from "../Navigation/Navigation";
 
 import styles from "./Header.module.css";
 
@@ -15,6 +16,9 @@ const Header = () => {
           <div className={styles.HeaderColumn}>
             <MoviesSearchForm />
           </div>
+        </div>
+        <div className={styles.HeaderRow}>
+          <Navigation />
         </div>
       </Container>
     </header>
