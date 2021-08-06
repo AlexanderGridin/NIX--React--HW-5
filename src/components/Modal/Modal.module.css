@@ -79,3 +79,9 @@
   background-repeat: no-repeat;
   background-size: contain;
 }
+
+.ModalContentOverflowController
+{
+  height: 100%;
+  overflow: auto;
+}

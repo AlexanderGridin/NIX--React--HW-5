@@ -1,0 +1,70 @@
+.Pagination
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.PaginationPages
+{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.PaginationButton
+{
+  background-color: #000;
+  color: #F5C518;
+  border: 1px solid #F5C518;
+  padding: 5px 15px;
+  font-size: 1rem;
+  line-height: 1.3;
+  font-family: inherit;
+  transition: 0.4s;
+}
+
+.PaginationButton:hover,
+.PaginationPageActive
+{
+  cursor: pointer;
+  color: #000;
+  background-color: #F5C518;
+}
+
+.PaginationFirst
+{
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.PaginationPrev
+{
+  border-left: none;
+}
+
+.PaginationNext
+{
+  border-right: none;
+}
+
+.PaginationLast
+{
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.PaginationPagesItem:last-child .PaginationPage
+{
+  border-right: none;
+}
+
+.PaginationPage
+{
+  border-left: none;
+}
+

@@ -8,7 +8,9 @@ const Modal = ({ children, onCLose }) => {
         <button className={ styles.ModalCloseButton } onClick={ onCLose }>
           &times;
         </button>
-        <div className={ styles.ModalContent }>{ children }</div>
+        <div className={ styles.ModalContent }>
+          <div className={ styles.ModalContentOverflowController }>{ children }</div>
+        </div>
       </div>
     </div>
   );
