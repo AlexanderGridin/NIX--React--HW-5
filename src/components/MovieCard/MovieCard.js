@@ -10,12 +10,12 @@ const MovieCard = ({ movie, onVeiwInfo, onRemove }) => {
         <ResponsiveImage src={ movie.Poster } alt={ movie.Title } width="250" height="376" />
       </div>
       <div className={ styles.MovieCardBody }>
-        <h3>{ movie.Title }</h3>
-        <div>{ movie.Year }</div>
+        <h3 className={ styles.MovieCardTitle }>{ movie.Title }</h3>
+        <div className={ styles.MovieCardYear }>{ `${movie.Year} / ${movie.Rated} / ${movie.Runtime}` }</div>
       </div>
       <div className={ styles.MovieCardFooter }>
-        <Button text="Info" type="button" onClick={ () => onVeiwInfo(movie) } />
-        <Button text="Remove" type="button" visualStyle="danger" onClick={ () => onRemove(movie) } />
+        <Button type="button" onClick={ () => onVeiwInfo(movie) }>Info</Button>
+        <Button type="button" visualStyle="danger" onClick={ () => onRemove(movie) }>Remove</Button>
       </div>
     </div>
   )

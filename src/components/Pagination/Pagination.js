@@ -1,16 +1,12 @@
 import { useState, useEffect } from "react";
 
+import { PAGINATION } from "../../lib/constants";
+
 import styles from "./Pagination.module.css";
 
 const Pagination = ({ totalPages, activePageProp, onPageChange }) => {
-  const [activePage, setActivePage] = useState(1);
+  const [activePage, setActivePage] = useState(PAGINATION.INITIAL_PAGE);
   let visiblePages = getVisiblePages(activePage, totalPages);
-
-  useEffect(() => {
-    if (activePageProp) {
-      setActivePage(activePageProp);
-    }
-  }, [activePageProp]);
 
   const setFirstPage = () => {
     if (activePage !== 1) {
@@ -52,6 +48,12 @@ const Pagination = ({ totalPages, activePageProp, onPageChange }) => {
       onPageChange(totalPages);
     }
   }
+
+  useEffect(() => {
+    if (activePageProp) {
+      setActivePage(activePageProp);
+    }
+  }, [activePageProp]);
 
   return (
     <div className={ styles.Pagination }>

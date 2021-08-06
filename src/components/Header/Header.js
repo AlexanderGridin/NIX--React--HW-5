@@ -13,7 +13,7 @@ const Header = () => {
             <Logo />
           </div>
           <div className={ styles.HeaderColumn }>
-            <MoviesSearchForm onSubmit={ (title) => console.log(title) } />
+            <MoviesSearchForm />
           </div>
         </div>
       </Container>

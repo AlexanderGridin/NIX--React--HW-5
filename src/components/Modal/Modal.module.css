@@ -77,9 +77,3 @@
   justify-content: center;
   flex-direction: column;
 }
-
-.ModalContentOverflowController
-{
-  height: 100%;
-  overflow: auto;
-}

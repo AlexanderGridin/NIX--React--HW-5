@@ -8,7 +8,8 @@ const MoviesSearchForm = ({ onSubmit }) => {
     e.preventDefault();
 
     if (movieTitle !== '') {
-      onSubmit(movieTitle);
+      console.log(movieTitle)
+      // onSubmit(movieTitle);
     }
   };
 

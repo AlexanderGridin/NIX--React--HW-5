@@ -3,7 +3,7 @@ import styles from "./Button.module.css";
 const PRIMARY = "primary";
 const DANGER = "danger";
 
-const Button = ({ text, type, visualStyle = PRIMARY, onClick }) => {
+const Button = ({ type, visualStyle = PRIMARY, children, onClick }) => {
   return (
     <button
       className={ `
@@ -14,7 +14,7 @@ const Button = ({ text, type, visualStyle = PRIMARY, onClick }) => {
       type={ type }
       onClick={ onClick }
     >
-      { text }
+      { children }
     </button>
   );
 };

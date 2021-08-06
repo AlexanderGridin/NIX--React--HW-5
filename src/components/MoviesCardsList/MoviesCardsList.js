@@ -3,8 +3,6 @@ import MovieCard from "../MovieCard/MovieCard";
 import styles from "./MoviesCardsList.module.css";
 
 const MoviesCardsList = ({ movies, onViewMovieInfo, onMovieRemove }) => {
-
-
   return (
     <>
       { movies && (

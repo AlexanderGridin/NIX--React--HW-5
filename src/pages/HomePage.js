@@ -27,6 +27,7 @@ const HomePage = () => {
   const isModalActive = useSelector(state => state.modal.isActive);
 
   const handlePageChange = (currentPaginationPage) => {
+    console.log(currentPaginationPage)
     dispatch(setCurrentPaginationPage({ currentPaginationPage }));
   };
 

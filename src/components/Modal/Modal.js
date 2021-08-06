@@ -1,5 +1,7 @@
 import { useDispatch } from "react-redux";
+
 import { setModalIsActive } from "../../store/modalSlice";
+
 import { MODAL } from "../../lib/constants";
 
 import styles from "./Modal.module.css";
@@ -19,9 +21,7 @@ const Modal = ({ children, onCLose }) => {
         <button className={ styles.ModalCloseButton } onClick={ handleClosing }>
           &times;
         </button>
-        <div className={ styles.ModalContent }>
-          <div className={ styles.ModalContentOverflowController }>{ children }</div>
-        </div>
+        <div className={ styles.ModalContent }>{ children }</div>
       </div>
     </div>
   );

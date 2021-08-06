@@ -35,6 +35,26 @@
   color: #FFF;
 }
 
+.MovieCardTitle
+{
+  font-size: 1.125rem;
+  margin: 0;
+  margin-bottom: 15px;
+  font-weight: bold;
+  line-height: 1.3;
+}
+
+.MovieCardYear
+{
+  background-color: #F5C518;
+  display: inline-block;
+  padding: 5px 15px;
+  color: #000;
+  border-radius: 5px;
+  font-size: .875rem;
+  font-weight: bold;
+}
+
 .MovieCardFooter
 {
   text-align: center;
