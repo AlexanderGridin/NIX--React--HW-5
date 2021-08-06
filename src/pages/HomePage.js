@@ -56,15 +56,17 @@ const HomePage = () => {
       return;
     }
 
+    if (moviesFromCurrentPage) {
+      dispatch(setTotalPagesForPagination({ totalPagesForPagination }));
+    }
+
     if (!moviesFromCurrentPage) {
       dispatch(setTotalPagesForPagination({ totalPagesForPagination: totalPagesForPagination - 1 }));
       dispatch(setCurrentPaginationPage({ pageNumber: currentPaginationPage - 1 }));
       moviesFromCurrentPage = getMoviesFromPage(currentPaginationPage - 1);
     }
 
-    if (moviesFromCurrentPage) {
-      dispatch(setTotalPagesForPagination({ totalPagesForPagination }));
-    }
+    console.log(moviesFromCurrentPage, totalPagesForPagination)
 
     omdbApi.fetchMoviesByIds(moviesFromCurrentPage).then(movies => {
       dispatch(setLoadedMovies({ loadedMovies: movies }));
