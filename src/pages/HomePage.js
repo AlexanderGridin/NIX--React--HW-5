@@ -1,9 +1,12 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setMovies, setSelectedMovie, setTotalPagesWithMovies } from "../store/moviesSlice";
+import { setModalIsActive } from "../store/modalSlice";
 
 import topMovies from "../lib/topMovies";
 import splitDataByNumberOfItemsPerPage from "../lib/splitDataByNumberOfItemsPerPage";
 import OMDbApi from "../lib/OMDbApi";
-import MOVIES from "../constants/MOVIES";
+import { MOVIES, MODAL } from "../lib/constants";
 
 import Page from "./Page/Page";
 import MoviesCardsList from "../components/MoviesCardsList/MoviesCardsList";
@@ -13,28 +16,42 @@ import Pagination from "../components/Pagination/Pagination";
 import Loader from "../components/Loader/Loader";
 
 const HomePage = () => {
-  const [movies, setMovies] = useState(null);
-  const [selectedMovie, setSelectedMovie] = useState(null);
-  const [totalPagesWithMovies, setTotalPagesWithMovies] = useState(null);
+  const dispatch = useDispatch();
+
+  const movies = useSelector(state => state.movies.movies);
+  const selectedMovie = useSelector(state => state.movies.selectedMovie);
+  const totalPagesWithMovies = useSelector(state => state.movies.totalPagesWithMovies);
+
+  const isModalActive = useSelector(state => state.modal.isActive);
 
   const handlePageChange = (pageNumber) => {
-    setMovies(null);
+    dispatch(setMovies({ movies: MOVIES.NOT_LOADED }));
+
     const omdbApi = new OMDbApi();
     const [getMoviesFromPage] = splitDataByNumberOfItemsPerPage(topMovies, MOVIES.PER_PAGE);
 
     omdbApi.fetchMoviesByIds(getMoviesFromPage(pageNumber)).then(movies => {
-      setMovies(movies);
+      dispatch(setMovies({ movies }));
     })
+  };
+
+  const handleSelectedMovie = (movie) => {
+    dispatch(setSelectedMovie({ movie }));
+    dispatch(setModalIsActive({ isActive: MODAL.IS_ACTIVE }));
+  };
+
+  const handleModalClose = () => {
+    dispatch(setSelectedMovie({ movie: MOVIES.NO_SELECTED }));
   };
 
   useEffect(() => {
     const omdbApi = new OMDbApi();
     const [getMoviesFromPage, totalPagesWithMovies] = splitDataByNumberOfItemsPerPage(topMovies, MOVIES.PER_PAGE);
 
-    setTotalPagesWithMovies(totalPagesWithMovies);
+    dispatch(setTotalPagesWithMovies({ totalPagesWithMovies }));
 
     omdbApi.fetchMoviesByIds(getMoviesFromPage(1)).then(movies => {
-      setMovies(movies);
+      dispatch(setMovies({ movies }));
     })
   }, []);
 
@@ -43,13 +60,13 @@ const HomePage = () => {
       { totalPagesWithMovies && <Pagination totalPages={ totalPagesWithMovies } onPageChange={ handlePageChange } /> }
 
       { movies && (
-        <MoviesCardsList movies={ movies } onViewMovieFull={ setSelectedMovie } />
+        <MoviesCardsList movies={ movies } onViewMovieFull={ handleSelectedMovie } />
       ) }
 
 
 
-      { selectedMovie && (
-        <Modal onCLose={ () => setSelectedMovie(null) }>
+      { isModalActive && (
+        <Modal onCLose={ handleModalClose }>
           <MovieFull movie={ selectedMovie } />
         </Modal>
       ) }

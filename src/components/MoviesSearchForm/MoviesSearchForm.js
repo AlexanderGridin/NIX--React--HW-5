@@ -1,7 +1,5 @@
 import { useState } from "react";
 
-import Button from "../Button/Button";
-
 import styles from "./MoviesSearchForm.module.css";
 
 const MoviesSearchForm = ({ onSubmit }) => {
