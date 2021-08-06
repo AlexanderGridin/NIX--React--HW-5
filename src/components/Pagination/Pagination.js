@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import styles from "./Pagination.module.css";
 
-const Pagination = ({ totalPages, onPageChange }) => {
+const Pagination = ({ totalPages, activePageProp, onPageChange }) => {
   const [activePage, setActivePage] = useState(1);
   let visiblePages = getVisiblePages(activePage, totalPages);
+
+  useEffect(() => {
+    if (activePageProp) {
+      setActivePage(activePageProp);
+    }
+  }, [activePageProp]);
 
   const setFirstPage = () => {
     if (activePage !== 1) {
@@ -77,6 +83,14 @@ function getVisiblePages (activePage, totalPages) {
   const halfOfVisiblePages = Math.floor(NUMBER_OF_VISIBLE_PAGES / 2);
   const firstVisiblePage = activePage - halfOfVisiblePages;
   const lastVisiblePage = activePage + halfOfVisiblePages;
+
+  if (totalPages < NUMBER_OF_VISIBLE_PAGES) {
+    for (let i = 1; i <= totalPages; i++) {
+      pages.push(i);
+    }
+
+    return pages;
+  }
 
   if (lastVisiblePage >= totalPages) {
     let firstVisiblePage = totalPages - NUMBER_OF_VISIBLE_PAGES + 1;

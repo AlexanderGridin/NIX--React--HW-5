@@ -1,4 +1,4 @@
-const topMovies = [
+let topMovies = [
   "tt0111161",
   "tt0068646",
   "tt0071562",
@@ -250,5 +250,8 @@ const topMovies = [
   "tt0169102",
   "tt0056801"
 ];
+
+/** Этот фрагмент можно использовать для тестирования поведения приложение при малом значении начальных topMovies */
+// topMovies = ["tt0111161",];
 
 export default topMovies;

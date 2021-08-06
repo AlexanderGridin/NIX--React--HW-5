@@ -2,7 +2,7 @@ import MovieCard from "../MovieCard/MovieCard";
 
 import styles from "./MoviesCardsList.module.css";
 
-const MoviesCardsList = ({ movies, onViewMovieFull }) => {
+const MoviesCardsList = ({ movies, onViewMovieInfo, onMovieRemove }) => {
 
 
   return (
@@ -12,7 +12,7 @@ const MoviesCardsList = ({ movies, onViewMovieFull }) => {
           { movies.map((movie) => {
             return (
               <li className={ styles.MoviesCardsListItem } key={ movie.imdbID }>
-                <MovieCard movie={ movie } onVeiwFull={ onViewMovieFull } />
+                <MovieCard movie={ movie } onVeiwInfo={ onViewMovieInfo } onRemove={ onMovieRemove } />
               </li>
             );
           }) }

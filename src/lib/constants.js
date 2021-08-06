@@ -3,6 +3,7 @@ export const MOVIES = {
   NOT_LOADED: null,
   NO_SELECTED: null,
   NO_PAGES: null,
+  NO_MOVIES: -1,
 };
 
 export const MODAL = {

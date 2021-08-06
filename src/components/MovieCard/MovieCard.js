@@ -3,7 +3,7 @@ import Button from "../Button/Button";
 
 import styles from "./MovieCard.module.css";
 
-const MovieCard = ({ movie, onVeiwFull }) => {
+const MovieCard = ({ movie, onVeiwInfo, onRemove }) => {
   return (
     <div className={ styles.MovieCard }>
       <div className={ styles.MovieCardMedia }>
@@ -14,8 +14,8 @@ const MovieCard = ({ movie, onVeiwFull }) => {
         <div>{ movie.Year }</div>
       </div>
       <div className={ styles.MovieCardFooter }>
-        <Button text="Info" type="button" onClick={ () => onVeiwFull(movie) } />
-        <Button text="Remove" type="button" visualStyle="danger" />
+        <Button text="Info" type="button" onClick={ () => onVeiwInfo(movie) } />
+        <Button text="Remove" type="button" visualStyle="danger" onClick={ () => onRemove(movie) } />
       </div>
     </div>
   )
