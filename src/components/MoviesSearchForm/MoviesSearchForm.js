@@ -1,21 +1,24 @@
 import { useState } from "react";
 
+import Button from "../Button/Button";
+
+import styles from "./MoviesSearchForm.module.css";
+
 const MoviesSearchForm = ({ onSubmit }) => {
   const [movieTitle, setMovieTitle] = useState('');
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(movieTitle);
+
+    if (movieTitle !== '') {
+      onSubmit(movieTitle);
+    }
   };
 
   return (
-    <form action="#" onSubmit={ handleSubmit }>
-      <div className="form-item">
-        <label htmlFor="movie-title">Find movie</label>
-        <input onChange={ (e) => setMovieTitle(e.target.value) } value={ movieTitle } type="search" name="movie-title" id="movie-title" />
-      </div>
-      <div className="form-actions">
-        <button type="submit">Search</button>
-      </div>
+    <form className={ styles.MoviesSearchForm } action="#" onSubmit={ handleSubmit }>
+      <input className={ styles.MoviesSearchFormSearchInput } onChange={ (e) => setMovieTitle(e.target.value.trim()) } value={ movieTitle } type="search" name="movie-title" placeholder="search" id="movie-title" />
+      {/* <Button text="Search" type="submit" /> */ }
+      <button className={ styles.MoviesSearchFormSubmit } type="submit">Search</button>
     </form>
   );
 };

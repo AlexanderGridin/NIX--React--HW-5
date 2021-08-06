@@ -1,0 +1,48 @@
+.MoviesSearchForm
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.MoviesSearchFormSearchInput
+{
+  height: 37px;
+  border: 2px solid #FFF;
+  border-right: none;
+  font-size: 1rem;
+  font-family: inherit;
+  padding: 0 10px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  transition: 0.4s;
+}
+
+.MoviesSearchFormSearchInput:hover,
+.MoviesSearchFormSearchInput:focus
+{
+  border: 2px solid #F5C518;
+  border-right: none;
+  outline: none;
+}
+
+.MoviesSearchFormSubmit
+{
+  padding: 7px 15px;
+  font-size: 1rem;
+  font-family: inherit;
+  border: 2px solid #F5C518;
+  border-left: none;
+  background-color: #F5C518;
+  color: #000;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  transition: 0.4s;
+}
+
+.MoviesSearchFormSubmit:hover
+{
+  background-color: #000;
+  color: #F5C518;
+  cursor: pointer;
+}
