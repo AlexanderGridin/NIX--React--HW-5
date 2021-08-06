@@ -8,4 +8,8 @@ export const NAVIGATION = [
     title: "About",
     url: "/about",
   },
+  {
+    title: "Search results",
+    url: "/search-results",
+  },
 ];
