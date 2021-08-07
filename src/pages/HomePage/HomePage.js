@@ -92,13 +92,15 @@ const HomePage = () => {
 
   return (
     <Page title="Top 250 movies">
-      {totalPagesForPagination && loadedMovies !== MOVIES.NO_MOVIES && (
-        <Pagination
-          totalPages={totalPagesForPagination}
-          pageForActivation={activePaginationPage}
-          onPageChange={handlePageChange}
-        />
-      )}
+      {totalPagesForPagination &&
+        loadedMovies !== MOVIES.NOT_LOADED &&
+        loadedMovies !== MOVIES.NO_MOVIES && (
+          <Pagination
+            totalPages={totalPagesForPagination}
+            pageForActivation={activePaginationPage}
+            onPageChange={handlePageChange}
+          />
+        )}
 
       {loadedMovies === MOVIES.NO_MOVIES && (
         <div style={{ textAlign: "center", color: "#FFF" }}>
@@ -106,13 +108,14 @@ const HomePage = () => {
         </div>
       )}
 
-      {loadedMovies !== MOVIES.NO_MOVIES && (
-        <MoviesCardsList
-          movies={loadedMovies}
-          onViewMovieInfo={viewMovieInfo}
-          onMovieRemove={removeMovie}
-        />
-      )}
+      {loadedMovies !== MOVIES.NOT_LOADED &&
+        loadedMovies !== MOVIES.NO_MOVIES && (
+          <MoviesCardsList
+            movies={loadedMovies}
+            onViewMovieInfo={viewMovieInfo}
+            onMovieRemove={removeMovie}
+          />
+        )}
 
       {isModalActive && (
         <Modal onCLose={handleModalClose}>
@@ -120,7 +123,8 @@ const HomePage = () => {
         </Modal>
       )}
 
-      {!loadedMovies && loadedMovies !== MOVIES.NO_MOVIES && <Loader />}
+      {loadedMovies === MOVIES.NOT_LOADED &&
+        loadedMovies !== MOVIES.NO_MOVIES && <Loader />}
     </Page>
   );
 };

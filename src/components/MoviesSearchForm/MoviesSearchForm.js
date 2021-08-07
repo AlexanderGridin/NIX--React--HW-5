@@ -21,11 +21,11 @@ const MoviesSearchForm = () => {
 
       const omdbApi = new OMDbApi();
 
-      omdbApi.fetchMoviesByTitle(movieTitle).then((searchResult) => {
+      omdbApi.fetchMoviesByTitle(movieTitle).then((searchResults) => {
         let findedMovies = [];
 
-        searchResult.forEach((res) => {
-          findedMovies.push(...res.Search);
+        searchResults.forEach((result) => {
+          findedMovies.push(...result.Search);
         });
 
         dispatch(setLoadedMovies({ loadedMovies: findedMovies }));
@@ -50,7 +50,7 @@ const MoviesSearchForm = () => {
         placeholder="search"
         id="movie-title"
       />
-      {/* <Button text="Search" type="submit" /> */}
+
       <button className={styles.MoviesSearchFormSubmit} type="submit">
         Search
       </button>
