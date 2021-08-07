@@ -23,19 +23,18 @@ import Loader from "../../components/Loader/Loader";
 const SearchResultsPage = () => {
   const dispatch = useDispatch();
 
-  const movies = useSelector((state) => state.movies.loadedMovies);
+  const loadedMovies = useSelector((state) => state.movies.loadedMovies);
   const movieForInfoView = useSelector(
     (state) => state.movies.movieForInfoView
   );
   const totalPagesForPagination = useSelector(
     (state) => state.movies.totalPagesForPagination
   );
+  const isModalActive = useSelector((state) => state.modal.isActive);
+
   const [currentPaginationPage, setCurrentPaginationPage] = useState(
     PAGINATION.INITIAL_PAGE
   );
-
-  const isModalActive = useSelector((state) => state.modal.isActive);
-
   const [moviesOnCurrentPage, setMoviesOnCurrentPage] = useState(null);
 
   const handlePageChange = (activePaginationPage) => {
@@ -60,11 +59,11 @@ const SearchResultsPage = () => {
   };
 
   useEffect(() => {
-    if (!movies) {
+    if (!loadedMovies) {
       return;
     }
 
-    if (movies.length === 0) {
+    if (loadedMovies.length === 0) {
       setMoviesOnCurrentPage(MOVIES.NO_MOVIES);
       dispatch(setLoadedMovies({ loadedMovies: MOVIES.NO_MOVIES }));
 
@@ -72,20 +71,22 @@ const SearchResultsPage = () => {
     }
 
     const [getMoviesFromPage, totalPagesForPagination] =
-      splitDataByNumberOfItemsPerPage(movies, MOVIES.PER_PAGE);
-    const moviesFromPage = getMoviesFromPage(currentPaginationPage);
+      splitDataByNumberOfItemsPerPage(loadedMovies, MOVIES.PER_PAGE);
+    const moviesFromCurrentPaginationPage = getMoviesFromPage(
+      currentPaginationPage
+    );
 
-    if (movies.length > 0 && moviesFromPage) {
+    if (loadedMovies.length > 0 && moviesFromCurrentPaginationPage) {
       dispatch(setTotalPagesForPagination({ totalPagesForPagination }));
       setMoviesOnCurrentPage(getMoviesFromPage(currentPaginationPage));
 
       return;
     }
 
-    if (movies.length > 0 && !moviesFromPage) {
+    if (loadedMovies.length > 0 && !moviesFromCurrentPaginationPage) {
       setCurrentPaginationPage(currentPaginationPage - 1);
     }
-  }, [movies, currentPaginationPage]);
+  }, [loadedMovies, currentPaginationPage]);
 
   return (
     <Page title="Search results">
@@ -112,7 +113,7 @@ const SearchResultsPage = () => {
       )}
 
       {isModalActive && (
-        <Modal onCLose={handleModalClose}>
+        <Modal onClose={handleModalClose}>
           <MovieFull movie={movieForInfoView} />
         </Modal>
       )}

@@ -4,7 +4,7 @@ import { PAGINATION } from "../../lib/constants";
 
 import styles from "./Pagination.module.css";
 
-const Pagination = ({ totalPages, currentPage, onPageChange }) => {
+const Pagination = ({ totalPages, pageForActivation, onPageChange }) => {
   const [activePage, setActivePage] = useState(PAGINATION.INITIAL_PAGE);
   let visiblePages = getVisiblePages(activePage, totalPages);
 
@@ -50,10 +50,10 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
   };
 
   useEffect(() => {
-    if (currentPage) {
-      setActivePage(currentPage);
+    if (pageForActivation) {
+      setActivePage(pageForActivation);
     }
-  }, [currentPage]);
+  }, [pageForActivation]);
 
   return (
     <div className={styles.Pagination}>

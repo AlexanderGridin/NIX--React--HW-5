@@ -6,11 +6,11 @@ import { MODAL } from "../../lib/constants";
 
 import styles from "./Modal.module.css";
 
-const Modal = ({ children, onCLose }) => {
+const Modal = ({ children, onClose }) => {
   const dispatch = useDispatch();
 
   const handleClosing = () => {
-    onCLose();
+    onClose();
     dispatch(setModalIsActive({ isActive: MODAL.IS_DISABLED }));
   };
 

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Logo = () => {
   return (
-    <Link to="/" exact>
+    <Link to="/" exact="true">
       <svg
         id="home_img"
         className="ipc-logo"
