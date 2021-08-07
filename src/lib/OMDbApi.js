@@ -23,8 +23,5 @@ export default class OMDbApi {
     }
 
     return await Promise.all(queries);
-
-    // const requestUrl = `${this._PRIMARY_URL}&s=${title}`;
-    // return await getJSONDataFromApi(requestUrl).then((data) => data);
   }
 }

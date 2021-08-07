@@ -35,7 +35,9 @@ const SearchResultsPage = () => {
   const [activePaginationPage, setActivePaginationPage] = useState(
     PAGINATION.INITIAL_PAGE
   );
-  const [moviesOnCurrentPage, setMoviesOnCurrentPage] = useState(null);
+  const [moviesOnCurrentPage, setMoviesOnCurrentPage] = useState(
+    MOVIES.NOT_LOADED
+  );
 
   const handlePageChange = (activePaginationPage) => {
     setActivePaginationPage(activePaginationPage);
@@ -89,13 +91,15 @@ const SearchResultsPage = () => {
 
   return (
     <Page title="Search results">
-      {totalPagesForPagination && moviesOnCurrentPage !== MOVIES.NO_MOVIES && (
-        <Pagination
-          totalPages={totalPagesForPagination}
-          pageForActivation={activePaginationPage}
-          onPageChange={handlePageChange}
-        />
-      )}
+      {totalPagesForPagination &&
+        moviesOnCurrentPage !== MOVIES.NOT_LOADED &&
+        moviesOnCurrentPage !== MOVIES.NO_MOVIES && (
+          <Pagination
+            totalPages={totalPagesForPagination}
+            pageForActivation={activePaginationPage}
+            onPageChange={handlePageChange}
+          />
+        )}
 
       {moviesOnCurrentPage === MOVIES.NO_MOVIES && (
         <div style={{ textAlign: "center", color: "#FFF" }}>
@@ -103,13 +107,14 @@ const SearchResultsPage = () => {
         </div>
       )}
 
-      {moviesOnCurrentPage && moviesOnCurrentPage !== MOVIES.NO_MOVIES && (
-        <MoviesCardsList
-          movies={moviesOnCurrentPage}
-          onViewMovieInfo={viewMovieInfo}
-          onMovieRemove={removeMovie}
-        />
-      )}
+      {moviesOnCurrentPage !== MOVIES.NOT_LOADED &&
+        moviesOnCurrentPage !== MOVIES.NO_MOVIES && (
+          <MoviesCardsList
+            movies={moviesOnCurrentPage}
+            onViewMovieInfo={viewMovieInfo}
+            onMovieRemove={removeMovie}
+          />
+        )}
 
       {isModalActive && (
         <Modal onClose={handleModalClose}>
@@ -117,9 +122,8 @@ const SearchResultsPage = () => {
         </Modal>
       )}
 
-      {!moviesOnCurrentPage && moviesOnCurrentPage !== MOVIES.NO_MOVIES && (
-        <Loader />
-      )}
+      {moviesOnCurrentPage === MOVIES.NOT_LOADED &&
+        moviesOnCurrentPage !== MOVIES.NO_MOVIES && <Loader />}
     </Page>
   );
 };
