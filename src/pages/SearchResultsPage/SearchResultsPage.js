@@ -32,15 +32,15 @@ const SearchResultsPage = () => {
   );
   const isModalActive = useSelector((state) => state.modal.isActive);
 
-  const [activePaginationPage, setActivePaginationPage] = useState(
+  const [activePaginationPageNumber, setActivePaginationPageNumber] = useState(
     PAGINATION.INITIAL_PAGE
   );
   const [moviesOnCurrentPage, setMoviesOnCurrentPage] = useState(
     MOVIES.NOT_LOADED
   );
 
-  const handlePageChange = (activePaginationPage) => {
-    setActivePaginationPage(activePaginationPage);
+  const handlePageChange = (activePaginationPageNumber) => {
+    setActivePaginationPageNumber(activePaginationPageNumber);
   };
 
   const viewMovieInfo = (movie) => {
@@ -74,20 +74,21 @@ const SearchResultsPage = () => {
 
     const [getMoviesFromPage, totalPagesForPagination] =
       splitDataByNumberOfItemsPerPage(loadedMovies, MOVIES.PER_PAGE);
-    const moviesFromActivePaginationPage =
-      getMoviesFromPage(activePaginationPage);
+    const moviesFromActivePaginationPage = getMoviesFromPage(
+      activePaginationPageNumber
+    );
 
     if (loadedMovies.length > 0 && moviesFromActivePaginationPage) {
       dispatch(setTotalPagesForPagination({ totalPagesForPagination }));
-      setMoviesOnCurrentPage(getMoviesFromPage(activePaginationPage));
+      setMoviesOnCurrentPage(moviesFromActivePaginationPage);
 
       return;
     }
 
     if (loadedMovies.length > 0 && !moviesFromActivePaginationPage) {
-      setActivePaginationPage(activePaginationPage - 1);
+      setActivePaginationPageNumber(activePaginationPageNumber - 1);
     }
-  }, [loadedMovies, activePaginationPage]);
+  }, [loadedMovies, activePaginationPageNumber]);
 
   return (
     <Page title="Search results">
@@ -96,7 +97,7 @@ const SearchResultsPage = () => {
         moviesOnCurrentPage !== MOVIES.NO_MOVIES && (
           <Pagination
             totalPages={totalPagesForPagination}
-            pageNumberForActivation={activePaginationPage}
+            pageNumberForActivation={activePaginationPageNumber}
             onPageChange={handlePageChange}
           />
         )}
