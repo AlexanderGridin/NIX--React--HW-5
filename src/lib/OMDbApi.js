@@ -5,12 +5,16 @@ export default class OMDbApi {
 
   async fetchMovieById(id) {
     const requestUrl = `${this._PRIMARY_URL}&i=${id}`;
-
     return await getJSONDataFromApi(requestUrl).then((data) => data);
   }
 
   async fetchMoviesByIds(ids) {
     let queries = ids.map((id) => this.fetchMovieById(id));
     return await Promise.all(queries);
+  }
+
+  async fetchMoviesByTitle(title) {
+    const requestUrl = `${this._PRIMARY_URL}&s=${title}`;
+    return await getJSONDataFromApi(requestUrl).then((data) => data);
   }
 }

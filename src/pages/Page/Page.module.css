@@ -6,4 +6,9 @@
 
 .PageContent {
   color: #fff;
+  line-height: 1.5;
+}
+
+.PageContent p + p {
+  margin-top: 20px;
 }

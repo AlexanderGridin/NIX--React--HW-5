@@ -1,4 +1,8 @@
 const splitDataByNumberOfItemsPerPage = (data, itemsPerPage) => {
+  if (!Array.isArray(data)) {
+    return [(pageNumber) => null, null];
+  }
+
   let result = [];
   let copyOfData = data.slice();
   const numberOfPages = Math.ceil(copyOfData.length / itemsPerPage);

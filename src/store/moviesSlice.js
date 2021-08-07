@@ -28,6 +28,12 @@ const moviesSlice = createSlice({
         (movieId) => movieId !== action.payload.movieId
       );
     },
+
+    removeMovieFromLoadedMovies(state, action) {
+      state.loadedMovies = state.loadedMovies.filter(
+        (movie) => movie.imdbID !== action.payload.movieId
+      );
+    },
   },
 });
 
@@ -36,5 +42,6 @@ export const {
   setMovieForInfoView,
   setTotalPagesForPagination,
   removeMovieFromTopMovies,
+  removeMovieFromLoadedMovies,
 } = moviesSlice.actions;
 export default moviesSlice.reducer;

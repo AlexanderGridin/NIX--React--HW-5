@@ -16,9 +16,7 @@ const MovieCard = ({ movie, onVeiwInfo, onRemove }) => {
       </div>
       <div className={styles.MovieCardBody}>
         <h3 className={styles.MovieCardTitle}>{movie.Title}</h3>
-        <div
-          className={styles.MovieCardYear}
-        >{`${movie.Year} / ${movie.Rated} / ${movie.Runtime}`}</div>
+        <div className={styles.MovieCardYear}>{movie.Year}</div>
       </div>
       <div className={styles.MovieCardFooter}>
         <Button type="button" onClick={() => onVeiwInfo(movie)}>
