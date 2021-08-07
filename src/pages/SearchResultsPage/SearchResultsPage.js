@@ -32,13 +32,13 @@ const SearchResultsPage = () => {
   );
   const isModalActive = useSelector((state) => state.modal.isActive);
 
-  const [currentPaginationPage, setCurrentPaginationPage] = useState(
+  const [activePaginationPage, setActivePaginationPage] = useState(
     PAGINATION.INITIAL_PAGE
   );
   const [moviesOnCurrentPage, setMoviesOnCurrentPage] = useState(null);
 
   const handlePageChange = (activePaginationPage) => {
-    setCurrentPaginationPage(activePaginationPage);
+    setActivePaginationPage(activePaginationPage);
   };
 
   const viewMovieInfo = (movie) => {
@@ -50,7 +50,7 @@ const SearchResultsPage = () => {
     });
   };
 
-  const handleMovieRemoving = (movie) => {
+  const removeMovie = (movie) => {
     dispatch(removeMovieFromLoadedMovies({ movieId: movie.imdbID }));
   };
 
@@ -72,28 +72,27 @@ const SearchResultsPage = () => {
 
     const [getMoviesFromPage, totalPagesForPagination] =
       splitDataByNumberOfItemsPerPage(loadedMovies, MOVIES.PER_PAGE);
-    const moviesFromCurrentPaginationPage = getMoviesFromPage(
-      currentPaginationPage
-    );
+    const moviesFromActivePaginationPage =
+      getMoviesFromPage(activePaginationPage);
 
-    if (loadedMovies.length > 0 && moviesFromCurrentPaginationPage) {
+    if (loadedMovies.length > 0 && moviesFromActivePaginationPage) {
       dispatch(setTotalPagesForPagination({ totalPagesForPagination }));
-      setMoviesOnCurrentPage(getMoviesFromPage(currentPaginationPage));
+      setMoviesOnCurrentPage(getMoviesFromPage(activePaginationPage));
 
       return;
     }
 
-    if (loadedMovies.length > 0 && !moviesFromCurrentPaginationPage) {
-      setCurrentPaginationPage(currentPaginationPage - 1);
+    if (loadedMovies.length > 0 && !moviesFromActivePaginationPage) {
+      setActivePaginationPage(activePaginationPage - 1);
     }
-  }, [loadedMovies, currentPaginationPage]);
+  }, [loadedMovies, activePaginationPage]);
 
   return (
     <Page title="Search results">
       {totalPagesForPagination && moviesOnCurrentPage !== MOVIES.NO_MOVIES && (
         <Pagination
           totalPages={totalPagesForPagination}
-          currentPage={currentPaginationPage}
+          pageForActivation={activePaginationPage}
           onPageChange={handlePageChange}
         />
       )}
@@ -108,7 +107,7 @@ const SearchResultsPage = () => {
         <MoviesCardsList
           movies={moviesOnCurrentPage}
           onViewMovieInfo={viewMovieInfo}
-          onMovieRemove={handleMovieRemoving}
+          onMovieRemove={removeMovie}
         />
       )}
 
