@@ -17,10 +17,9 @@ const Header = () => {
             <MoviesSearchForm />
           </div>
         </div>
-        <div className={styles.HeaderRow}>
-          <Navigation />
-        </div>
       </Container>
+
+      <Navigation />
     </header>
   );
 };

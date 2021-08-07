@@ -97,7 +97,7 @@ const HomePage = () => {
         loadedMovies !== MOVIES.NO_MOVIES && (
           <Pagination
             totalPages={totalPagesForPagination}
-            pageForActivation={activePaginationPage}
+            pageNumberForActivation={activePaginationPage}
             onPageChange={handlePageChange}
           />
         )}

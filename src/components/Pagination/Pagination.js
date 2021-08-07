@@ -4,56 +4,58 @@ import { PAGINATION } from "../../lib/constants";
 
 import styles from "./Pagination.module.css";
 
-const Pagination = ({ totalPages, pageForActivation, onPageChange }) => {
-  const [activePage, setActivePage] = useState(PAGINATION.INITIAL_PAGE);
-  let visiblePages = getVisiblePages(activePage, totalPages);
+const Pagination = ({ totalPages, pageNumberForActivation, onPageChange }) => {
+  const [activePageNumber, setActivePageNumber] = useState(
+    PAGINATION.INITIAL_PAGE
+  );
+  let visiblePages = getVisiblePages(activePageNumber, totalPages);
 
   const gotoFirstPage = () => {
-    if (activePage !== 1) {
-      setActivePage(1);
+    if (activePageNumber !== 1) {
+      setActivePageNumber(1);
       onPageChange && onPageChange(1);
     }
   };
 
   const gotoPrevPage = () => {
-    const targetPage = activePage - 1;
+    const targetPageNumber = activePageNumber - 1;
 
-    if (targetPage >= 1) {
-      setActivePage(targetPage);
-      onPageChange && onPageChange(targetPage);
+    if (targetPageNumber >= 1) {
+      setActivePageNumber(targetPageNumber);
+      onPageChange && onPageChange(targetPageNumber);
     }
   };
 
   const gotoPage = (e) => {
     const targetPageNumber = +e.target.textContent;
 
-    if (targetPageNumber !== activePage) {
-      setActivePage(targetPageNumber);
+    if (targetPageNumber !== activePageNumber) {
+      setActivePageNumber(targetPageNumber);
       onPageChange && onPageChange(targetPageNumber);
     }
   };
 
   const gotoNextPage = () => {
-    const targetPage = activePage + 1;
+    const targetPageNumber = activePageNumber + 1;
 
-    if (targetPage <= totalPages) {
-      setActivePage(targetPage);
-      onPageChange && onPageChange(targetPage);
+    if (targetPageNumber <= totalPages) {
+      setActivePageNumber(targetPageNumber);
+      onPageChange && onPageChange(targetPageNumber);
     }
   };
 
   const gotoLastPage = () => {
-    if (activePage !== totalPages) {
-      setActivePage(totalPages);
+    if (activePageNumber !== totalPages) {
+      setActivePageNumber(totalPages);
       onPageChange && onPageChange(totalPages);
     }
   };
 
   useEffect(() => {
-    if (pageForActivation) {
-      setActivePage(pageForActivation);
+    if (pageNumberForActivation) {
+      setActivePageNumber(pageNumberForActivation);
     }
-  }, [pageForActivation]);
+  }, [pageNumberForActivation]);
 
   return (
     <div className={styles.Pagination}>
@@ -75,7 +77,7 @@ const Pagination = ({ totalPages, pageForActivation, onPageChange }) => {
           visiblePages.map((pageNumber) => {
             return (
               <li className={styles.PaginationPagesItem} key={pageNumber}>
-                {pageNumber === activePage ? (
+                {pageNumber === activePageNumber ? (
                   <button
                     className={`${styles.PaginationPage} ${styles.PaginationButton} ${styles.PaginationPageActive}`}
                     disabled={true}
@@ -110,45 +112,45 @@ const Pagination = ({ totalPages, pageForActivation, onPageChange }) => {
   );
 };
 
-// TODO: РЕФАКТОРИНГ!
-function getVisiblePages(activePage, totalPages) {
-  let pages = [];
+function getVisiblePages(activePageNumber, totalPages) {
+  let visiblePages = [];
+
   const NUMBER_OF_VISIBLE_PAGES = 5;
   const halfOfVisiblePages = Math.floor(NUMBER_OF_VISIBLE_PAGES / 2);
-  const firstVisiblePage = activePage - halfOfVisiblePages;
-  const lastVisiblePage = activePage + halfOfVisiblePages;
+  const firstVisiblePage = activePageNumber - halfOfVisiblePages;
+  const lastVisiblePage = activePageNumber + halfOfVisiblePages;
 
   if (totalPages < NUMBER_OF_VISIBLE_PAGES) {
     for (let i = 1; i <= totalPages; i++) {
-      pages.push(i);
+      visiblePages.push(i);
     }
 
-    return pages;
+    return visiblePages;
   }
 
   if (lastVisiblePage >= totalPages) {
     let firstVisiblePage = totalPages - NUMBER_OF_VISIBLE_PAGES + 1;
 
     for (let i = firstVisiblePage; i <= totalPages; i++) {
-      pages.push(i);
+      visiblePages.push(i);
     }
 
-    return pages;
+    return visiblePages;
   }
 
   if (firstVisiblePage > 1) {
     for (let i = firstVisiblePage; i <= lastVisiblePage; i++) {
-      pages.push(i);
+      visiblePages.push(i);
     }
   }
 
   if (firstVisiblePage <= 1) {
     for (let i = 1; i <= NUMBER_OF_VISIBLE_PAGES; i++) {
-      pages.push(i);
+      visiblePages.push(i);
     }
   }
 
-  return pages;
+  return visiblePages;
 }
 
 export default Pagination;

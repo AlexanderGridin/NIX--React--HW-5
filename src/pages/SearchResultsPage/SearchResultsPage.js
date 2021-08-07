@@ -96,7 +96,7 @@ const SearchResultsPage = () => {
         moviesOnCurrentPage !== MOVIES.NO_MOVIES && (
           <Pagination
             totalPages={totalPagesForPagination}
-            pageForActivation={activePaginationPage}
+            pageNumberForActivation={activePaginationPage}
             onPageChange={handlePageChange}
           />
         )}

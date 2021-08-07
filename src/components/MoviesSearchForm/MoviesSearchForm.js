@@ -11,17 +11,21 @@ import styles from "./MoviesSearchForm.module.css";
 const MoviesSearchForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [movieTitle, setMovieTitle] = useState("");
+  const [moviesTitleForSearch, setMoviesTitleForSearch] = useState("");
+
+  const changeMoviesTitleForSearch = (e) => {
+    setMoviesTitleForSearch(e.target.value.trim());
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (movieTitle !== "") {
+    if (moviesTitleForSearch !== "") {
       dispatch(setLoadedMovies({ loadedMovies: MOVIES.NOT_LOADED }));
 
       const omdbApi = new OMDbApi();
 
-      omdbApi.fetchMoviesByTitle(movieTitle).then((searchResults) => {
+      omdbApi.fetchMoviesByTitle(moviesTitleForSearch).then((searchResults) => {
         let findedMovies = [];
 
         searchResults.forEach((result) => {
@@ -43,8 +47,8 @@ const MoviesSearchForm = () => {
     >
       <input
         className={styles.MoviesSearchFormSearchInput}
-        onChange={(e) => setMovieTitle(e.target.value.trim())}
-        value={movieTitle}
+        onChange={changeMoviesTitleForSearch}
+        value={moviesTitleForSearch}
         type="search"
         name="movie-title"
         placeholder="search"

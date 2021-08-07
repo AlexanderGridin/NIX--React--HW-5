@@ -4,6 +4,14 @@ import Button from "../Button/Button";
 import styles from "./MovieCard.module.css";
 
 const MovieCard = ({ movie, onVeiwInfo, onRemove }) => {
+  const viewInfo = () => {
+    onVeiwInfo(movie);
+  };
+
+  const removeMovie = () => {
+    onRemove(movie);
+  };
+
   return (
     <div className={styles.MovieCard}>
       <div className={styles.MovieCardMedia}>
@@ -19,14 +27,10 @@ const MovieCard = ({ movie, onVeiwInfo, onRemove }) => {
         <div className={styles.MovieCardYear}>{movie.Year}</div>
       </div>
       <div className={styles.MovieCardFooter}>
-        <Button type="button" onClick={() => onVeiwInfo(movie)}>
+        <Button type="button" onClick={viewInfo}>
           Info
         </Button>
-        <Button
-          type="button"
-          visualStyle="danger"
-          onClick={() => onRemove(movie)}
-        >
+        <Button type="button" visualStyle="danger" onClick={removeMovie}>
           Remove
         </Button>
       </div>
