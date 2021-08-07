@@ -14,8 +14,8 @@ import OMDbApi from "../../lib/OMDbApi";
 import { MOVIES, MODAL, PAGINATION } from "../../lib/constants";
 
 import Page from "../Page/Page";
-import MoviesCardsList from "../../components/MoviesCardsList/MoviesCardsList";
 import Pagination from "../../components/Pagination/Pagination";
+import MoviesCardsList from "../../components/MoviesCardsList/MoviesCardsList";
 import Modal from "../../components/Modal/Modal";
 import MovieFull from "../../components/MovieFull/MovieFull";
 import Loader from "../../components/Loader/Loader";
@@ -46,7 +46,7 @@ const HomePage = () => {
     dispatch(setModalIsActive({ isActive: MODAL.IS_ACTIVE }));
   };
 
-  const handleMovieRemoving = (movie) => {
+  const removeMovie = (movie) => {
     dispatch(removeMovieFromTopMovies({ movieId: movie.imdbID }));
   };
 
@@ -83,15 +83,11 @@ const HomePage = () => {
       return;
     }
 
-    if (moviesFromActivePaginationPage) {
-      dispatch(setTotalPagesForPagination({ totalPagesForPagination }));
+    dispatch(setTotalPagesForPagination({ totalPagesForPagination }));
 
-      omdbApi
-        .fetchMoviesByIds(moviesFromActivePaginationPage)
-        .then((movies) => {
-          dispatch(setLoadedMovies({ loadedMovies: movies }));
-        });
-    }
+    omdbApi.fetchMoviesByIds(moviesFromActivePaginationPage).then((movies) => {
+      dispatch(setLoadedMovies({ loadedMovies: movies }));
+    });
   }, [topMovies, activePaginationPage]);
 
   return (
@@ -110,11 +106,11 @@ const HomePage = () => {
         </div>
       )}
 
-      {loadedMovies && loadedMovies !== MOVIES.NO_MOVIES && (
+      {loadedMovies !== MOVIES.NO_MOVIES && (
         <MoviesCardsList
           movies={loadedMovies}
           onViewMovieInfo={viewMovieInfo}
-          onMovieRemove={handleMovieRemoving}
+          onMovieRemove={removeMovie}
         />
       )}
 
