@@ -33,12 +33,12 @@ const HomePage = () => {
   );
   const isModalActive = useSelector((state) => state.modal.isActive);
 
-  const [activePaginationPage, setActivePaginationPage] = useState(
+  const [activePaginationPageNumber, setActivePaginationPageNumber] = useState(
     PAGINATION.INITIAL_PAGE
   );
 
-  const handlePageChange = (activePaginationPage) => {
-    setActivePaginationPage(activePaginationPage);
+  const handlePageChange = (activePaginationPageNumber) => {
+    setActivePaginationPageNumber(activePaginationPageNumber);
   };
 
   const viewMovieInfo = (movie) => {
@@ -60,8 +60,9 @@ const HomePage = () => {
     const omdbApi = new OMDbApi();
     const [getMoviesFromPage, totalPagesForPagination] =
       splitDataByNumberOfItemsPerPage(topMovies, MOVIES.PER_PAGE);
-    let moviesFromActivePaginationPage =
-      getMoviesFromPage(activePaginationPage);
+    let moviesFromActivePaginationPage = getMoviesFromPage(
+      activePaginationPageNumber
+    );
 
     if (!moviesFromActivePaginationPage && totalPagesForPagination === 0) {
       dispatch(setLoadedMovies({ loadedMovies: MOVIES.NO_MOVIES }));
@@ -75,9 +76,9 @@ const HomePage = () => {
         })
       );
 
-      setActivePaginationPage(activePaginationPage - 1);
+      setActivePaginationPageNumber(activePaginationPageNumber - 1);
       moviesFromActivePaginationPage = getMoviesFromPage(
-        activePaginationPage - 1
+        activePaginationPageNumber - 1
       );
 
       return;
@@ -88,7 +89,7 @@ const HomePage = () => {
     omdbApi.fetchMoviesByIds(moviesFromActivePaginationPage).then((movies) => {
       dispatch(setLoadedMovies({ loadedMovies: movies }));
     });
-  }, [topMovies, activePaginationPage]);
+  }, [topMovies, activePaginationPageNumber]);
 
   return (
     <Page title="Top 250 movies">
@@ -97,7 +98,7 @@ const HomePage = () => {
         loadedMovies !== MOVIES.NO_MOVIES && (
           <Pagination
             totalPages={totalPagesForPagination}
-            pageNumberForActivation={activePaginationPage}
+            pageNumberForActivation={activePaginationPageNumber}
             onPageChange={handlePageChange}
           />
         )}
