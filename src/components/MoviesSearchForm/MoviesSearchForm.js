@@ -17,14 +17,18 @@ const MoviesSearchForm = () => {
     e.preventDefault();
 
     if (movieTitle !== "") {
-      console.log(movieTitle);
       dispatch(setLoadedMovies({ loadedMovies: MOVIES.NOT_LOADED }));
 
       const omdbApi = new OMDbApi();
 
       omdbApi.fetchMoviesByTitle(movieTitle).then((searchResult) => {
-        console.log(searchResult);
-        dispatch(setLoadedMovies({ loadedMovies: searchResult.Search }));
+        let findedMovies = [];
+
+        searchResult.forEach((res) => {
+          findedMovies.push(...res.Search);
+        });
+
+        dispatch(setLoadedMovies({ loadedMovies: findedMovies }));
       });
 
       history.push("/search-results");

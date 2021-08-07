@@ -60,8 +60,6 @@ const SearchResultsPage = () => {
   };
 
   useEffect(() => {
-    console.log(moviesOnCurrentPage);
-
     if (!movies) {
       return;
     }
@@ -78,11 +76,6 @@ const SearchResultsPage = () => {
     const moviesFromPage = getMoviesFromPage(currentPaginationPage);
 
     if (movies.length > 0 && moviesFromPage) {
-      console.log(
-        totalPagesForPagination,
-        getMoviesFromPage(currentPaginationPage)
-      );
-
       dispatch(setTotalPagesForPagination({ totalPagesForPagination }));
       setMoviesOnCurrentPage(getMoviesFromPage(currentPaginationPage));
 

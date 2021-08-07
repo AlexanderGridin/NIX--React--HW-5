@@ -14,7 +14,17 @@ export default class OMDbApi {
   }
 
   async fetchMoviesByTitle(title) {
-    const requestUrl = `${this._PRIMARY_URL}&s=${title}`;
-    return await getJSONDataFromApi(requestUrl).then((data) => data);
+    const NUMBER_OF_PAGES = 10;
+    let queries = [];
+
+    for (let i = 0; i < NUMBER_OF_PAGES; i++) {
+      const requestUrl = `${this._PRIMARY_URL}&s=${title}&page=${i + 1}`;
+      queries.push(getJSONDataFromApi(requestUrl).then((data) => data));
+    }
+
+    return await Promise.all(queries);
+
+    // const requestUrl = `${this._PRIMARY_URL}&s=${title}`;
+    // return await getJSONDataFromApi(requestUrl).then((data) => data);
   }
 }
