@@ -118,7 +118,7 @@ const HomePage = () => {
         )}
 
       {isModalActive && (
-        <Modal onCLose={handleModalClose}>
+        <Modal onClose={handleModalClose}>
           <MovieFull movie={movieForInfoView} />
         </Modal>
       )}
